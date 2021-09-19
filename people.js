@@ -14,7 +14,7 @@ const renderCustomers = (accounts) => {
         name.className = 'h1';
         balance.textContent = `Balance : ₹${account.data().balance}`;
         balance.className = 'lead';
-        id.textContent = `Bank ID : ${account.id}`;
+        id.textContent = `Bank ID : ${account.data().id}`;
         id.className = 'blockquote-footer';
 
         li.appendChild(name);
@@ -28,7 +28,7 @@ const renderCustomers = (accounts) => {
 }
 
 // GET data from firestore(Not REALTIME)
-db.collection('Customers').get().then((snapshot) => {
+db.collection('Customers').orderBy("id").get().then((snapshot) => {
     renderCustomers(snapshot.docs);
     console.log(snapshot.docs);
 })
